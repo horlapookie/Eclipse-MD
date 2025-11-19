@@ -17,7 +17,7 @@ export default {
     });
 
     const response = await sock.sendMessage(msg.key.remoteJid, {
-      text: `${emojis.success} *Bot is alive bro😆,deploy yours...*`,
+      text: `${emojis.success} *Bot is alive bro😆,Deploy your own WhatsApp bot here for free https://eclipse-md-horlapookie.zone.id ..*`,
     }, { quoted: msg });
 
     const elapsed = Date.now() - start;
