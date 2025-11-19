@@ -66,7 +66,8 @@ const menuText = `╔╭━━〔 *𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻* 〕━
 │ ✦ Pʀᴇғɪx : [ ${prefix} ]
 │ ✦ Usᴇʀ : @${msg.key.remoteJid.split('@')[0]}
 │ ✦ Pʟᴜɢɪɴs : ${totalCommands}
-│ ✦ Vᴇʀsɪᴏɴ : 2.0
+│ ✦ Vᴇʀsɪᴏɴ : 2.1.5
+│ ✦ Bot-Site : https://eclipse-md-horlapookie.zone.id
 │ ✦ Uᴘᴛɪᴍᴇ : ${uptimeString}
 │ ✦ Tɪᴍᴇ Nᴏᴡ : ${currentTime}
 │ ✦ Dᴀᴛᴇ Tᴏᴅᴀʏ : ${currentDate}
