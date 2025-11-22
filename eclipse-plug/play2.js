@@ -70,8 +70,8 @@ export default {
           forwardingScore: 1,
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363422772567017@newsletter',
-            newsletterName: 'Your highness',
+            newsletterJid: '120363197273830813@newsletter',
+            newsletterName: 'Eclipse NOVA',
             serverMessageId: -1
           }
         }
