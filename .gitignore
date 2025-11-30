@@ -1,0 +1,10 @@
+auth_info/
+auth_info_baileys/
+*.log
+node_modules/
+.env
+package-lock.json
+.DS_Store
+*.swp
+*.swo
+*~

@@ -1,0 +1,22 @@
+[phases.setup]
+nixPkgs = [
+  'nodejs-20_x',
+  'ffmpeg',
+  'libvips',
+  'pkg-config',
+  'cairo',
+  'pango',
+  'libjpeg',
+  'giflib',
+  'librsvg',
+  'python3'
+]
+
+[phases.install]
+cmds = ['npm install']
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = 'npm start'

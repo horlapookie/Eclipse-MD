@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+.env
+.git
+.gitignore
+README.md
+.vscode
+.idea
+auth_info_baileys
+*.log
+.replit
+replit.nix

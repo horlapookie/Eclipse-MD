@@ -1,0 +1,81 @@
+{
+  "name": "Eclipse MD Bot",
+  "description": "A powerful multi-device WhatsApp bot built with Node.js and Docker — includes AI support, automation, and 400+ commands.",
+  "repository": "https://github.com/horlapookie/Eclipse-MD",
+  "logo": "https://i.imgur.com/zQx8lE5.png",
+  "keywords": ["whatsapp", "bot", "nodejs", "docker", "ai", "eclipse-md"],
+  "website": "https://github.com/horlapookie/Eclipse-MD",
+  "stack": "container",
+  "env": {
+    "NODE_ENV": {
+      "description": "Set the environment to production",
+      "value": "production"
+    },
+    "BOT_PREFIX": {
+      "description": "Command prefix (default: .)",
+      "required": false
+    },
+    "BOT_NUMBER": {
+      "description": "Your WhatsApp number without + or country code prefix (e.g., 2348028336218)",
+      "required": true
+    },
+    "BOT_OWNER_NAME": {
+      "description": "Bot owner display name (default: Eclipse)",
+      "required": false
+    },
+    "BOT_NAME": {
+      "description": "Bot display name (default: 𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻)",
+      "required": false
+    },
+    "BOT_SESSION_DATA": {
+      "description": "Session ID from https://horlapookie-session.onrender.com",
+      "required": true
+    },
+    "OPENAI_API_KEY": {
+      "description": "Optional: OpenAI API key for AI features",
+      "required": false
+    },
+    "GEMINI_API_KEY": {
+      "description": "Optional: Google Gemini API key for AI features",
+      "required": false
+    },
+    "AUTO_VIEW_MESSAGE": {
+      "description": "Automatically view messages (true/false, default: false)",
+      "required": false
+    },
+    "AUTO_VIEW_STATUS": {
+      "description": "Automatically view WhatsApp statuses (true/false, default: false)",
+      "required": false
+    },
+    "AUTO_REACT_STATUS": {
+      "description": "Automatically react to statuses (true/false, default: false)",
+      "required": false
+    },
+    "AUTO_REACT": {
+      "description": "Automatically react to messages (true/false, default: false)",
+      "required": false
+    },
+    "AUTO_STATUS_EMOJI": {
+      "description": "Emoji to use for auto status reactions (default: ❤️)",
+      "required": false
+    },
+    "AUTO_TYPING": {
+      "description": "Show typing indicator automatically (true/false, default: false)",
+      "required": false
+    },
+    "AUTO_RECORDING": {
+      "description": "Show recording indicator automatically (true/false, default: false)",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [],
+  "scripts": {
+    "postdeploy": "echo '✅ Eclipse MD Bot has been successfully deployed to Heroku using Docker!'"
+  }
+}

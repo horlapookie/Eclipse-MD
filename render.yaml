@@ -1,0 +1,68 @@
+services:
+  - type: web
+    name: eclipse-md-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    region: oregon
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BOT_PREFIX
+        sync: false
+        generateValue: false
+        description: "Command prefix (default: .)"
+      - key: BOT_NUMBER
+        sync: false
+        generateValue: false
+        description: "Your WhatsApp number without + or country code prefix (e.g., 2348028336218)"
+      - key: BOT_OWNER_NAME
+        sync: false
+        generateValue: false
+        description: "Bot owner display name (default: Eclipse)"
+      - key: BOT_NAME
+        sync: false
+        generateValue: false
+        description: "Bot display name (default: 𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻)"
+      - key: BOT_SESSION_DATA
+        sync: false
+        generateValue: false
+        description: "Session ID from https://horlapookie-session.onrender.com"
+      - key: OPENAI_API_KEY
+        sync: false
+        generateValue: false
+        description: "Optional: OpenAI API key for AI features"
+      - key: GEMINI_API_KEY
+        sync: false
+        generateValue: false
+        description: "Optional: Google Gemini API key for AI features"
+      - key: AUTO_VIEW_MESSAGE
+        sync: false
+        generateValue: false
+        description: "Automatically view messages (true/false, default: false)"
+      - key: AUTO_VIEW_STATUS
+        sync: false
+        generateValue: false
+        description: "Automatically view WhatsApp statuses (true/false, default: false)"
+      - key: AUTO_REACT_STATUS
+        sync: false
+        generateValue: false
+        description: "Automatically react to statuses (true/false, default: false)"
+      - key: AUTO_REACT
+        sync: false
+        generateValue: false
+        description: "Automatically react to messages (true/false, default: false)"
+      - key: AUTO_STATUS_EMOJI
+        sync: false
+        generateValue: false
+        description: "Emoji to use for auto status reactions (default: ❤️)"
+      - key: AUTO_TYPING
+        sync: false
+        generateValue: false
+        description: "Show typing indicator automatically (true/false, default: false)"
+      - key: AUTO_RECORDING
+        sync: false
+        generateValue: false
+        description: "Show recording indicator automatically (true/false, default: false)"
+    autoDeploy: true
+    healthCheckPath: /
