@@ -1,3 +1,7 @@
+// ====================================
+// ECLIPSE-MD ARTIFICIAL INTELLIGENCE COMMANDS
+// ====================================
+
 import { queryAI, generateImage, getModelList, getModelInfo, getImageModelList, getImageModelInfo } from '../lib/prexzyAI.js';
 import axios from 'axios';
 
