@@ -473,7 +473,7 @@ const gitrepoCommand = {
 
     if (!args[0]) {
       return await sock.sendMessage(from, {
-        text: `*📦 GitHub Repository Downloader*\n\nUsage: .gitrepo <github-url>\n\nExample:\n.gitrepo https://github.com/horlapookie/Horlapookie-bot\n\n*Bot:* ${config.botName}\n*Note:* Supports public repositories only.`
+        text: `*📦 GitHub Repository Downloader*\n\nUsage: .gitrepo <github-url>\n\nExample:\n.gitrepo https://github.com/horlapookie/Eclipse-MD\n\n*Bot:* ${config.botName}\n*Note:* Supports public repositories only.`
       }, { quoted: msg });
     }
 
