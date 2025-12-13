@@ -1,15 +1,18 @@
-import config from '../config.js';
+// created with love by horlapookie 🧬🧬
+
 import { channelInfo } from '../lib/channelConfig.js';
 
 export default {
   name: 'owner',
   description: 'Get bot owner contact information',
   aliases: ['creator', 'developer', 'admin'],
-  async execute(msg, { sock, args, settings }) {
+  async execute(msg, { sock }) {
     const from = msg.key.remoteJid;
-    const ownerNumber = config.ownerNumber.replace(/\+/g, '');
-    const ownerName = config.ownerName || 'Eclipse';
-    
+
+    // 🔒 Hardcoded owner details
+    const ownerNumber = '2349122222622'; // no +
+    const ownerName = 'Eclipse';
+
     try {
       // Create vCard contact
       const vcard = `BEGIN:VCARD
@@ -18,19 +21,25 @@ FN:${ownerName}
 TEL;waid=${ownerNumber}:${ownerNumber}
 END:VCARD`;
 
-      await sock.sendMessage(from, {
-        contacts: {
-          displayName: ownerName,
-          contacts: [{ vcard }]
+      await sock.sendMessage(
+        from,
+        {
+          contacts: {
+            displayName: ownerName,
+            contacts: [{ vcard }]
+          },
+          ...channelInfo
         },
-        ...channelInfo
-      }, { quoted: msg });
+        { quoted: msg }
+      );
 
     } catch (error) {
       console.error('Owner command error:', error);
-      await sock.sendMessage(from, {
-        text: `❌ Error sending owner contact: ${error.message}`
-      }, { quoted: msg });
+      await sock.sendMessage(
+        from,
+        { text: `❌ Error sending owner contact: ${error.message}` },
+        { quoted: msg }
+      );
     }
   }
 };
