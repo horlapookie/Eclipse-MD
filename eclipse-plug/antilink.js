@@ -1,4 +1,6 @@
-
+// ====================================
+// ECLIPSE-MD ANTILINK COMMANDS
+//====================================
 import { setAntilinkSetting, getAntilinkSetting } from '../lib/antilinkSettings.js';
 import isAdmin from '../lib/isAdmin.js';
 import fs from 'fs';
