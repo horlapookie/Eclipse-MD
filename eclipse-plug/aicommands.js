@@ -174,34 +174,15 @@ async function handleReactionCommand(reaction, msg, sock, settings) {
       try {
         console.log(`[REACTION] Trying prexzyvilla API for ${reaction}...`);
         const prexzyResponse = await axios.get(`https://apis.prexzyvilla.site/anime/${reaction}`, {
-          responseType: 'arraybuffer',
           timeout: 20000,
           headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
           }
         });
-        const contentType = prexzyResponse.headers['content-type'] || '';
-        buffer = Buffer.from(prexzyResponse.data);
         
-        console.log(`[REACTION] prexzyvilla response: ${contentType}, size: ${buffer.length}`);
-        
-        if (buffer.length > 1000) {
-          if (contentType.includes('gif') || contentType.includes('video')) {
-            await sock.sendMessage(from, {
-              video: buffer,
-              gifPlayback: true,
-              caption: caption,
-              mentions: mentions
-            }, { quoted: msg });
-            return;
-          } else if (contentType.includes('image')) {
-            await sock.sendMessage(from, {
-              image: buffer,
-              caption: caption,
-              mentions: mentions
-            }, { quoted: msg });
-            return;
-          }
+        if (prexzyResponse.data && prexzyResponse.data.status && prexzyResponse.data.result) {
+          gifUrl = prexzyResponse.data.result;
+          console.log(`[REACTION] prexzyvilla returned URL: ${gifUrl}`);
         }
       } catch (e) {
         console.log(`[REACTION] prexzy API failed for ${reaction}:`, e.message);
@@ -209,26 +190,12 @@ async function handleReactionCommand(reaction, msg, sock, settings) {
     }
     
     if (gifUrl) {
-      const isGif = gifUrl.endsWith('.gif');
-      const isVideo = gifUrl.endsWith('.mp4') || gifUrl.endsWith('.webm');
-      
-      if (isGif || isVideo) {
-        const gifResponse = await axios.get(gifUrl, { responseType: 'arraybuffer', timeout: 30000 });
-        buffer = Buffer.from(gifResponse.data);
-        
-        await sock.sendMessage(from, {
-          video: buffer,
-          gifPlayback: true,
-          caption: caption,
-          mentions: mentions
-        }, { quoted: msg });
-      } else {
-        await sock.sendMessage(from, {
-          image: { url: gifUrl },
-          caption: caption,
-          mentions: mentions
-        }, { quoted: msg });
-      }
+      await sock.sendMessage(from, {
+        video: { url: gifUrl },
+        gifPlayback: true,
+        caption: caption,
+        mentions: mentions
+      }, { quoted: msg });
     } else {
       throw new Error('No GIF source available');
     }

@@ -1497,7 +1497,7 @@ Type ${botPrefix}menu to see all commands
 }
 
 // Import and start web interface
-import('./lib/web.js');
+import('./lib/preview.js');
 
 // Display ASCII art for ECLIPSE-MD (compact logo design)
 const asciiArt = `
