@@ -213,6 +213,24 @@ async function setupAuthState() {
       try {
         fs.writeFileSync(instanceSessionFile, sessionData);
         console.log(color('[SUCCESS] Session ID saved to file for future use.', 'green'));
+
+        // Auto-detect number and update config
+        try {
+          const decoded = Buffer.from(sessionData, 'base64').toString('utf-8');
+          const parsed = JSON.parse(decoded);
+          if (parsed.me?.id) {
+            const connectedNumber = parsed.me.id.split(':')[0];
+            console.log(color(`[AUTH] Detected number: ${connectedNumber}`, 'cyan'));
+            if (config.ownerNumber !== connectedNumber) {
+              console.log(color(`[AUTH] Updating owner number to: ${connectedNumber}`, 'yellow'));
+              config.ownerNumber = connectedNumber;
+              if (global.config) global.config.ownerNumber = connectedNumber;
+              updateSetting('ownerNumber', connectedNumber);
+            }
+          }
+        } catch (e) {
+          console.log(color('[WARN] Could not auto-detect number from session', 'yellow'));
+        }
       } catch (error) {
         console.log(color('[WARN] Could not save session ID to file:', 'yellow'), error.message);
       }
@@ -249,6 +267,24 @@ async function setupAuthState() {
         try {
           fs.writeFileSync(instanceSessionFile, sessionData);
           console.log(color('[SUCCESS] Session ID saved to file.', 'green'));
+
+          // Auto-detect number and update config
+          try {
+            const decoded = Buffer.from(sessionData, 'base64').toString('utf-8');
+            const parsed = JSON.parse(decoded);
+            if (parsed.me?.id) {
+              const connectedNumber = parsed.me.id.split(':')[0];
+              console.log(color(`[AUTH] Detected number: ${connectedNumber}`, 'cyan'));
+              if (config.ownerNumber !== connectedNumber) {
+                console.log(color(`[AUTH] Updating owner number to: ${connectedNumber}`, 'yellow'));
+                config.ownerNumber = connectedNumber;
+                if (global.config) global.config.ownerNumber = connectedNumber;
+                updateSetting('ownerNumber', connectedNumber);
+              }
+            }
+          } catch (e) {
+            console.log(color('[WARN] Could not auto-detect number from session', 'yellow'));
+          }
         } catch (error) {
           console.log(color('[WARN] Could not save session ID to file:', 'yellow'), error.message);
         }
