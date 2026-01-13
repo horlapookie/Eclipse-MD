@@ -29,14 +29,30 @@
     },
     "BOT_SESSION_DATA": {
       "description": "Session ID",
-      "required": true
+      "required": false
     },
-    "OPENAI_API_KEY": {
-      "description": "Optional: OpenAI API key",
+    "GIPHY_API_KEY": {
+      "description": "Optional: Giphy API key",
+      "required": false
+    },
+    "FOOTBALL_API_KEY": {
+      "description": "Optional: Football API key",
+      "required": false
+    },
+    "IMGUR_CLIENT_ID": {
+      "description": "Optional: Imgur Client ID",
+      "required": false
+    },
+    "COPILOT_API_KEY": {
+      "description": "Optional: Copilot API key",
       "required": false
     },
     "GEMINI_API_KEY": {
       "description": "Optional: Gemini API key",
+      "required": false
+    },
+    "OPENAI_API_KEY": {
+      "description": "Optional: OpenAI API key",
       "required": false
     },
     "AUTO_VIEW_MESSAGE": {
