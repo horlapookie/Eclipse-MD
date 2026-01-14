@@ -69,11 +69,22 @@ export default {
         const groupMentionPatterns = [/@everyone/i, /@tagall/i, /@all/i];
         const isGroupMention = groupMentionPatterns.some(pattern => pattern.test(messageText));
 
-        if (isGroupMention) {
+        // Detect mentions of the group itself (often from forwarded status or external posts)
+        const contextInfo = msg.message?.extendedTextMessage?.contextInfo;
+        const externalAd = contextInfo?.externalAdReply;
+        const isGroupLinkOrMention = /chat\.whatsapp\.com\/[a-zA-Z0-9]+/i.test(messageText) || 
+                                   (externalAd && /chat\.whatsapp\.com/i.test(externalAd.sourceUrl || ''));
+
+        if (isGroupMention || isGroupLinkOrMention) {
             try {
                 await sock.sendMessage(remoteJid, { delete: msg.key });
-                // Optional: Send a warning to the group
-                // await sock.sendMessage(remoteJid, { text: `⚠️ @${sender.split('@')[0]}, group mentions are not allowed!`, mentions: [sender] });
+                // If it's a mention from an external post/status
+                if (isGroupLinkOrMention) {
+                   await sock.sendMessage(remoteJid, { 
+                       text: `⚠️ @${sender.split('@')[0]}, mentioning/posting the group from external sources is not allowed!`, 
+                       mentions: [sender] 
+                   });
+                }
             } catch (e) {}
         }
     }

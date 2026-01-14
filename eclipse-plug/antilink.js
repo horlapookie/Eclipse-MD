@@ -48,9 +48,12 @@ async function handleAntilinkCommand(sock, chatId, userMessage, senderId, isSend
             return;
         }
 
-        const prefix = '.';
-        const args = userMessage.slice(9).toLowerCase().trim().split(' ');
-        const action = args[0];
+        const prefix = global.COMMAND_PREFIX || '.';
+        const args = userMessage.trim().split(/\s+/);
+        // Find where 'antilink' is in the args to handle potential prefix issues
+        const cmdIdx = args.findIndex(a => a.includes('antilink'));
+        const subArgs = args.slice(cmdIdx + 1);
+        const action = subArgs[0]?.toLowerCase();
 
         if (!action) {
             const usage = `\`\`\`ANTILINK SETUP\n\n${prefix}antilink on\n${prefix}antilink set delete | kick | warn\n${prefix}antilink off\n\`\`\``;
