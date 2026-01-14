@@ -190,9 +190,10 @@ async function handleReactionCommand(reaction, msg, sock, settings) {
     }
     
     if (gifUrl) {
+      const isVideo = gifUrl.includes('.mp4') || gifUrl.includes('.webm');
       await sock.sendMessage(from, {
-        video: { url: gifUrl },
-        gifPlayback: true,
+        [isVideo ? 'video' : 'image']: { url: gifUrl },
+        gifPlayback: isVideo,
         caption: caption,
         mentions: mentions
       }, { quoted: msg });
