@@ -776,13 +776,13 @@ async function startBot() {
         console.log(color('[INFO] Connecting to WhatsApp...', 'blue'));
       } else if (connection === 'open') {
         console.log(color('\n🎉 PUBLIC BOT IS NOW ONLINE!', 'green'));
-        console.log('═'.repeat(50));
+        console.log(color('──────────────────────────────────────────────────', 'cyan'));
         console.log(color(`📱 Connected as: ${sock.user?.name || 'Bot'}`, 'cyan'));
         console.log(color(`📞 Number: ${sock.user?.id?.split(':')[0] || 'Unknown'}`, 'cyan'));
         console.log(color(`🚀 Command prefix: ${COMMAND_PREFIX}`, 'cyan'));
         console.log(color(`🤖 Mode: ${botMode.toUpperCase()}`, 'cyan'));
         console.log(color(`📋 Commands loaded: ${commands.size} public, ${selfCommands.size} self`, 'cyan'));
-        console.log('═'.repeat(50));
+        console.log(color('──────────────────────────────────────────────────', 'cyan'));
         processedMessages.clear();
 
         // Send connection message to owner with profile picture
@@ -1408,13 +1408,13 @@ Type ${botPrefix}menu to see all commands
             if (commandName === 'public' && isFromMe) {
               botMode = 'public';
               updateSetting('botMode', 'public');
-              await sock.sendMessage(senderNumber + '@s.whatsapp.net', { text: '🌐 Bot switched to PUBLIC mode. Everyone can use public commands.' });
+              await sock.sendMessage(remoteJid, { text: '🌐 Bot switched to PUBLIC mode. Everyone can use public commands.' }, { quoted: msg });
               return;
             }
             if (commandName === 'self' && isFromMe) {
               botMode = 'self';
               updateSetting('botMode', 'self');
-              await sock.sendMessage(senderNumber + '@s.whatsapp.net', { text: '🤖 Bot switched to SELF mode. Only bot can use commands.' });
+              await sock.sendMessage(remoteJid, { text: '🤖 Bot switched to SELF mode. Only bot can use commands.' }, { quoted: msg });
               return;
             }
             if (!botActive) {
