@@ -42,9 +42,9 @@ function saveUserGroupData(data) {
     }
 }
 
-// Add random delay between 2-5 seconds
+// Add random delay between 0.5-1.5 seconds for faster responses
 function getRandomDelay() {
-    return Math.floor(Math.random() * 3000) + 2000;
+    return Math.floor(Math.random() * 1000) + 500;
 }
 
 // Add typing indicator
