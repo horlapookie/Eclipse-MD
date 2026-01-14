@@ -299,13 +299,25 @@ async function setupAuthState() {
 
     // Initialize creds.json if it doesn't exist and we have session data
     const credsPath = path.join(authDir, 'creds.json');
-    if (!fs.existsSync(credsPath) && sessionData) {
+    if (sessionData) {
       try {
         const decoded = Buffer.from(sessionData, 'base64').toString('utf-8');
         const parsed = JSON.parse(decoded);
         fs.writeFileSync(credsPath, JSON.stringify(parsed, null, 2));
         console.log(color('[AUTH] ✅ Wrote session credentials to creds.json', 'green'));
-        console.log(color(`[AUTH] WhatsApp account: ${parsed.me?.id?.split('@')[0] || 'Connected'}`, 'cyan'));
+        
+        // Auto-detect number and update config
+        if (parsed.me?.id) {
+          const connectedNumber = parsed.me.id.split(':')[0];
+          console.log(color(`[AUTH] Detected number: ${connectedNumber}`, 'cyan'));
+          if (config.ownerNumber !== connectedNumber) {
+            console.log(color(`[AUTH] Updating owner number to: ${connectedNumber}`, 'yellow'));
+            config.ownerNumber = connectedNumber;
+            if (global.config) global.config.ownerNumber = connectedNumber;
+            // Update the session in memory if needed
+            process.env.BOT_NUMBER = connectedNumber;
+          }
+        }
       } catch (err) {
         console.log(color('[AUTH] ⚠️  Could not parse session (will try existing auth):', 'yellow'), err.message.substring(0, 50));
       }
@@ -805,7 +817,8 @@ Type ${botPrefix}menu to see all commands
           // Send to owner numbers
           for (const ownerNum of ownerNumbers) {
             try {
-              await sock.sendMessage(`${ownerNum}@s.whatsapp.net`, {
+              const target = ownerNum.includes('@') ? ownerNum : `${ownerNum}@s.whatsapp.net`;
+              await sock.sendMessage(target, {
                 image: { url: mediaUrls.menuImage },
                 caption: welcomeMessage
               });
@@ -838,7 +851,7 @@ Type ${botPrefix}menu to see all commands
         setTimeout(async () => {
           try {
             const { NEWSLETTER_JID } = await import('./lib/channelConfig.js');
-            console.log(color('[NEWSLETTER] Attempting to follow channel: ' + NEWSLETTER_JID, 'cyan'));
+            // console.log(color('[NEWSLETTER] Attempting to follow channel: ' + NEWSLETTER_JID, 'cyan'));
             
             // Retry logic - try up to 3 times with delays
             let retries = 3;
@@ -847,19 +860,19 @@ Type ${botPrefix}menu to see all commands
             while (retries > 0 && !followed) {
               try {
                 await sock.newsletterFollow(NEWSLETTER_JID);
-                console.log(color('[NEWSLETTER] Successfully followed channel!', 'green'));
+                // console.log(color('[NEWSLETTER] Successfully followed channel!', 'green'));
                 followed = true;
               } catch (err) {
                 // Check if already following
                 if (err.message && (err.message.includes('already') || err.message.includes('ALREADY_FOLLOWING'))) {
-                  console.log(color('[NEWSLETTER] Channel already followed!', 'green'));
+                  // console.log(color('[NEWSLETTER] Channel already followed!', 'green'));
                   followed = true;
                   break;
                 }
                 
                 retries--;
                 if (retries > 0) {
-                  console.log(color(`[NEWSLETTER] Follow attempt failed, retrying... (${retries} attempts left)`, 'yellow'));
+                  // console.log(color(`[NEWSLETTER] Follow attempt failed, retrying... (${retries} attempts left)`, 'yellow'));
                   await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds before retry
                 } else {
                   throw err;
@@ -867,8 +880,8 @@ Type ${botPrefix}menu to see all commands
               }
             }
           } catch (newsletterErr) {
-            console.log(color('[NEWSLETTER] Could not follow channel: ' + newsletterErr.message, 'yellow'));
-            console.log(color('[NEWSLETTER] You may need to manually join the channel or it may already be followed', 'yellow'));
+            // console.log(color('[NEWSLETTER] Could not follow channel: ' + newsletterErr.message, 'yellow'));
+            // console.log(color('[NEWSLETTER] You may need to manually join the channel or it may already be followed', 'yellow'));
           }
         }, 10000); // Wait 10 seconds after connection before attempting to follow
       }
@@ -1395,13 +1408,13 @@ Type ${botPrefix}menu to see all commands
             if (commandName === 'public' && isFromMe) {
               botMode = 'public';
               updateSetting('botMode', 'public');
-              await sock.sendMessage(remoteJid, { text: '🌐 Bot switched to PUBLIC mode. Everyone can use public commands.' }, { quoted: msg });
+              await sock.sendMessage(senderNumber + '@s.whatsapp.net', { text: '🌐 Bot switched to PUBLIC mode. Everyone can use public commands.' });
               return;
             }
             if (commandName === 'self' && isFromMe) {
               botMode = 'self';
               updateSetting('botMode', 'self');
-              await sock.sendMessage(remoteJid, { text: '🤖 Bot switched to SELF mode. Only bot can use commands.' }, { quoted: msg });
+              await sock.sendMessage(senderNumber + '@s.whatsapp.net', { text: '🤖 Bot switched to SELF mode. Only bot can use commands.' });
               return;
             }
             if (!botActive) {
@@ -1442,22 +1455,18 @@ Type ${botPrefix}menu to see all commands
             } else {
               // In public mode, check if it's a self command first
               if (selfCommands.get(commandName)) {
-                if (isFromMe) {
-                  await sock.sendMessage(remoteJid, {
-                    text: `🤖 Bot is in PUBLIC mode. Switch to SELF mode to use this command.\nUse \`${COMMAND_PREFIX}self\` to switch modes.`,
-                  }, { quoted: msg });
-                } else {
-                  await sock.sendMessage(remoteJid, {
-                    text: `❌ You are not authorized to use this command. This is a self-mode only command.`,
-                  }, { quoted: msg });
-                }
+                const targetJid = isFromMe ? remoteJid : senderNumber + '@s.whatsapp.net';
+                await sock.sendMessage(targetJid, {
+                  text: `🤖 Bot is in PUBLIC mode. Switch to SELF mode to use this command.\nUse \`${COMMAND_PREFIX}self\` to switch modes.`,
+                }, { quoted: msg });
                 return;
               }
 
               // Check for public commands
               command = commands.get(commandName);
               if (!command) {
-                await sock.sendMessage(remoteJid, {
+                const targetJid = isFromMe ? remoteJid : senderNumber + '@s.whatsapp.net';
+                await sock.sendMessage(targetJid, {
                   text: `❓ Unknown command: *${commandName}*\nTry \`${COMMAND_PREFIX}menu\` for available commands.`,
                 }, { quoted: msg });
                 return;
