@@ -18,7 +18,7 @@ export default {
         }
 
         if (!target) {
-            return sock.sendMessage(from, { text: '❌ Please provide a target number or reply to a user.\nUsage: .forceclose 2348123456789' });
+            return sock.sendMessage(from, { text: ' 😈😈 provide the fucking target number or reply to the fucking user.\nUsage: .forceclose 234******' });
         }
 
         // Standardize JID

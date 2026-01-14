@@ -136,6 +136,12 @@ async function handleReactionCommand(reaction, msg, sock, settings) {
   if (targetJid && targetNumber !== senderNumber) {
     caption = `@${senderNumber} ${verb} @${targetNumber} 🎌`;
     mentions = [senderJid, targetJid];
+  } else if (msg.message?.extendedTextMessage?.contextInfo?.participant) {
+    // Extra check for reply to context
+    const participant = msg.message.extendedTextMessage.contextInfo.participant;
+    const participantNumber = participant.split('@')[0];
+    caption = `@${senderNumber} ${verb} @${participantNumber} 🎌`;
+    mentions = [senderJid, participant];
   } else {
     caption = `@${senderNumber} ${verb}! 🎌`;
     mentions = [senderJid];
