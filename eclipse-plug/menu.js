@@ -78,6 +78,7 @@ export default {
 ╭━━━✦❮ 🛡️ ANTIGROUP COMMANDS ❯✦━⊷
 ┃✪  ${prefix}antilink
 ┃✪  ${prefix}antitag
+┃✪  ${prefix}antimention
 ┃✪  ${prefix}antichannellink
 ┃✪  ${prefix}antitelegramlink
 ╰━━━━━━━━━━━━━━━━━⊷

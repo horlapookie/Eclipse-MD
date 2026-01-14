@@ -1270,6 +1270,22 @@ Type ${botPrefix}menu to see all commands
 
           // Anti-detection for groups using proper antilink system
           if (isGroup && !isNewsletter && !isFromMe) {
+            // Use antitag detection
+            try {
+              const antitag = await import('./eclipse-plug/antitag.js');
+              await antitag.default.onMessage(msg, { sock });
+            } catch (err) {
+              console.log('[WARN] Antitag error:', err.message);
+            }
+
+            // Use antimention detection
+            try {
+              const antimention = await import('./eclipse-plug/antimention.js');
+              await antimention.default.onMessage(msg, { sock });
+            } catch (err) {
+              console.log('[WARN] Antimention error:', err.message);
+            }
+
             // Use the proper antilink detection system
             try {
               await handleLinkDetection(sock, remoteJid, msg, body, senderJid);

@@ -12,5 +12,6 @@
   "antiDeleteMessages": false,
   "antiVoiceCall": false,
   "antiVideoCall": false,
-  "antiBadWord": {}
+  "antiBadWord": {},
+  "ownerNumber": "2347050950238"
 }
