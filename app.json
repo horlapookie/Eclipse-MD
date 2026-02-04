@@ -1,0 +1,29 @@
+{
+  "name": "Eclipse MD Bot",
+  "description": "Eclipse MD WhatsApp Bot",
+  "repository": "https://github.com/horlapookie/Eclipse-MD",
+  "stack": "container",
+  "env": {
+    "BOT_PREFIX": {
+      "description": "Command prefix (example: . or #)",
+      "required": false
+    },
+    "BOT_NUMBER": {
+      "description": "Your WhatsApp number without + (example: 234xxxxxxxxxx)",
+      "required": true
+    },
+    "BOT_SESSION_DATA": {
+      "description": "WhatsApp session ID (base64)",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "scripts": {
+    "postdeploy": "echo '✅ Eclipse MD Bot deployed successfully'"
+  }
+}

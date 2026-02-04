@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: eclipse-md-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    region: oregon
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BOT_PREFIX
+        sync: false
+        generateValue: false
+        description: "Command prefix (default: .)"
+      - key: BOT_NUMBER
+        sync: false
+        generateValue: false
+        description: "Your WhatsApp number without + or country code prefix"
+      - key: BOT_SESSION_DATA
+        sync: false
+        generateValue: false
+        description: "Session ID"
+    autoDeploy: true
+    healthCheckPath: /
