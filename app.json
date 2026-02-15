@@ -21,7 +21,7 @@
     },
     "BOT_SESSION_DATA": {
       "description": "Session ID",
-      "required": false
+      "required": true
     }
   },
   "formation": {
