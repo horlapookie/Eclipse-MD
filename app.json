@@ -16,14 +16,15 @@
       "required": false
     },
     "BOT_NUMBER": {
-      "description": "Your WhatsApp number without + or country code prefix",
+      "description": "Your WhatsApp number without + or country code",
       "required": true
     },
     "BOT_SESSION_DATA": {
       "description": "Session ID",
       "required": false
-    },
-    "formation": {
+    }
+  },
+  "formation": {
     "web": {
       "quantity": 1,
       "size": "free"
@@ -31,6 +32,6 @@
   },
   "addons": [],
   "scripts": {
-    "postdeploy": "echo '✅ Eclipse MD Bot has been successfully deployed!'"
+    "postdeploy": "echo \"✅ Eclipse MD Bot has been successfully deployed!\""
   }
 }
