@@ -5,7 +5,7 @@
 ![Bot Logo](https://files.catbox.moe/kzxnt4.png)
 
 <!-- Animated Typing Effect -->
-![Typing SVG](https://readme-typing-svg.demolab.com/?lines=𝔼𝕔𝕝𝕚𝕡𝕤𝕖+𝕄𝔻+Bot+v1&font=Fira+Code&color=00C853&size=28&center=true&vCenter=true&width=800&height=50&duration=3000&pause=1000)
+![Typing SVG](https://readme-typing-svg.demolab.com/?lines=𝔼𝕔𝕝𝕚𝕡𝕤𝕖+𝕄𝔻+v1&font=Fira+Code&color=00C853&size=28&center=true&vCenter=true&width=800&height=50&duration=3000&pause=1000)
 
 <!-- Backup static version if SVG doesn't load -->
 <noscript>
@@ -94,8 +94,8 @@ npm start
 ## 📞 Contact & Support
 
 ### Get in Touch:
-- **🌐 Support Website**: [**www.eclipse-support.zone.id**](http://www.eclipse-support.zone.id)
-- **📱 Telegram**: [**t.me/horlapookie**](https://t.me/horlapookie)
+- **🌐 Support Website**: [**support**](http://www.eclipse-support.zone.id)
+- **📱 Telegram**: [**follow**](https://t.me/yourhighnesstech1)
 - **💬 WhatsApp Channel**: [**Join Now**](https://whatsapp.com/channel/0029VaIiMsqJf05e4Y4b9u0z)
 
 ### Support the Project
