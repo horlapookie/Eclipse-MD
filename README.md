@@ -48,6 +48,12 @@ A `railway.yaml` is included for easy deployment. Ensure you set the required en
 
 ### One-Click Deploy
 
+## 🔐 Generate Session ID
+
+Click the button below to generate your WhatsApp session.
+
+[![Generate Session](https://img.shields.io/badge/Generate%20Session%20ID-Click%20Here-green?style=for-the-badge&logo=whatsapp)](https://session.eclipse.name.ng)
+
 <p align="center">
   🚀 <b>One-Click Deploy</b>
 </p>
