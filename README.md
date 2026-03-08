@@ -3,7 +3,16 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C853,100:0D1117&height=180&section=header&text=ECLIPSE%20MD&fontSize=40&fontColor=ffffff&animation=fadeIn"/>🤖 𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻
 
-<div align="center"><img src="https://files.catbox.moe/kzxnt4.png" width="160">"Typing" (https://readme-typing-svg.demolab.com/?lines=𝔼𝕔𝕝𝕚𝕡𝕤𝕖+𝕄𝔻+v1;Advanced+WhatsApp+Bot;Fast+•+Stable+•+Powerful&font=Fira+Code&color=00C853&size=28&center=true&width=800&height=50)
+ 
+  <div align="center">
+
+<img src="https://files.catbox.moe/kzxnt4.png" width="260">
+
+<br><br>
+
+<img src="https://readme-typing-svg.demolab.com/?lines=𝔼𝕔𝕝𝕚𝕡𝕤𝕖+𝕄𝔻+v1;Advanced+WhatsApp+Bot;Fast+•+Stable+•+Powerful&font=Fira+Code&color=00C853&size=28&center=true&vCenter=true&width=800&height=60">
+
+</div>
 
 <br><a href="https://github.com/horlapookie/Eclipse-MD">
 <img src="https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github">
@@ -44,11 +53,12 @@ BOT_SESSION_DATA=<session>
 </a></div>---
 
 💻 Manual Installation
-
+```
 git clone https://github.com/horlapookie/Eclipse-MD.git
 cd Eclipse-MD
 npm install
 npm start
+```
 
 ---
 
