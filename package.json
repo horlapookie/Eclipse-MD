@@ -41,6 +41,7 @@
     "memoizee": "^0.4.17",
     "moment-timezone": "^0.6.0",
     "mongoose": "^8.21.0",
+    "mumaker": "^2.0.0",
     "node-fetch": "^3.3.2",
     "node-shazam": "latest",
     "node-webpmux": "^3.2.1",
