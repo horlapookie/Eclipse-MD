@@ -12,7 +12,7 @@
       "value": "production"
     },
     "BOT_PREFIX": {
-      "description": "Command prefix (default: .)",
+      "description": "Command prefix (default: 😎)",
       "required": false
     },
     "BOT_NUMBER": {
